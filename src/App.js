@@ -60,7 +60,9 @@ function App() {
 
     return (
       <div className="container">
-        <input id="timerInput" ref={inputRef} type="text" onChange={onChange} onBlur={onBlur} value={value} />
+        <div>
+        <input id="timerInput" ref={inputRef} type="text" onChange={onChange} onBlur={onBlur} value={value} />        
+        </div>
         <br></br>
         <div className="buttons">
           <button onClick={handleStartClick} className="start">Start</button>
