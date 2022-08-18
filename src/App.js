@@ -1,11 +1,14 @@
 import './App.css';
-import React from "react";
+import React, { useRef } from "react";
 import { createRoot } from 'react-dom/client';
 
 function App() {
+
+  const inputRef = useRef(null);
+
+
   const TimeInput = () => {
     const [value, setValue] = React.useState("03:00");
-
     const onChange = (event) => {
       setValue(event.target.value);
     };
@@ -53,24 +56,29 @@ function App() {
         .replace(/^0/, "");
     };
 
+    
+
     return (
-      <input id="timerInput" type="text" onChange={onChange} onBlur={onBlur} value={value} />
-    );
-  };
-  const root = createRoot(document.getElementById('root'));
-  root.render(<div className="container">
-    <div>
-      <TimeInput />
-    </div>
-    <br></br>
-    <div className="buttons">
-          <button onClick={() => null} className="start">Start</button>
+      <div className="container">
+        <input id="timerInput" ref={inputRef} type="text" onChange={onChange} onBlur={onBlur} value={value} />
+        <br></br>
+        <div className="buttons">
+          <button onClick={handleStartClick} className="start">Start</button>
           <button onClick={() => null} className="reset">Pause</button>
           <button onClick={() => null} className="start">Continue</button>
           <button onClick={() => null} className="reset">Reset</button>
         </div>
-  </div >);
+      </div>
+    );
+  };
 
+  const handleStartClick = () => {
+    const selectedTimeValue = inputRef.current.value;
+    console.log(selectedTimeValue);
+  }
+
+  const root = createRoot(document.getElementById('root'));
+  root.render(<TimeInput />);
 
 }
 
