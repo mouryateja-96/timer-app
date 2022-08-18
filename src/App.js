@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 function App() {
   const TimeInput = () => {
-    const [value, setValue] = React.useState("0:00");
+    const [value, setValue] = React.useState("03:00");
 
     const onChange = (event) => {
       setValue(event.target.value);
