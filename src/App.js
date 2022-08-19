@@ -1,11 +1,13 @@
 import './App.css';
 import React, { useRef } from "react";
 import { createRoot } from 'react-dom/client';
+import CountdownTimer from './CountdownTimer';
 
 function App() {
 
   const inputRef = useRef(null);
-
+  const NOW_IN_MS = new Date().getTime();
+  
 
   const TimeInput = () => {
     const [value, setValue] = React.useState("03:00");
@@ -56,12 +58,18 @@ function App() {
         .replace(/^0/, "");
     };
 
-    
+    const handleStartClick = async () => {
+      const selectedTimeValue = inputRef.current.value;
+      console.log(selectedTimeValue);
+      let selectedTimeInMS = NOW_IN_MS + getSecondsFromHHMMSS(selectedTimeValue) * 1000;      
+      console.log(selectedTimeInMS);
+      root.render(<CountdownTimer targetDate={selectedTimeInMS} />);
+    }
 
     return (
       <div className="container">
         <div>
-        <input id="timerInput" ref={inputRef} type="text" onChange={onChange} onBlur={onBlur} value={value} />        
+          <input id="timerInput" ref={inputRef} type="text" onChange={onChange} onBlur={onBlur} value={value} />
         </div>
         <br></br>
         <div className="buttons">
@@ -74,10 +82,7 @@ function App() {
     );
   };
 
-  const handleStartClick = () => {
-    const selectedTimeValue = inputRef.current.value;
-    console.log(selectedTimeValue);
-  }
+
 
   const root = createRoot(document.getElementById('root'));
   root.render(<TimeInput />);
