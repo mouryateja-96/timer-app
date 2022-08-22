@@ -35,7 +35,7 @@ const Timer = ({ targetTime }) => {
       <input readOnly={true} id="timerInput" type="text" value={`${Math.floor(seconds / 60)}:${("00" + (seconds % 60)).slice(-2)}`} />
       <br></br>
       <div className="buttons">
-        <button className="start" onClick={paused ? startTimer : pauseTimer}>
+        <button className={paused ? "start" : "pause"} onClick={paused ? startTimer : pauseTimer}>
           {paused ? "Start" : "Pause"}
         </button>
         <button className="reset" onClick={resetTimer}>Reset</button>
